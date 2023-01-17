@@ -40,6 +40,44 @@ import Card from '../../components/Card.astro';
         console.error('fail to send Zaraz event', error)
       }
     </script>
+    <script is:inline>
+      try {
+        const orderId = (+new Date()).toString()
+        const checkoutId = orderId.slice(-9)
+        zaraz.ecommerce('Order Completed', {
+        checkout_id: checkoutId,
+        order_id: orderId,
+        affiliation: 'humblemars.com',
+        total: 30.0,
+        revenue: 25.0,
+        shipping: 3,
+        tax: 2,
+        discount: 5,
+        coupon: 'winter-sale',
+        currency: 'USD',
+        products: [
+          {
+            product_id: '999666321',
+            sku: '8251511',
+            name: 'Boy’s shorts',
+            price: 10,
+            quantity: 2,
+            category: 'shorts',
+          },
+          {
+            product_id: '742566131',
+            sku: '7251567',
+            name: 'Blank T-shirt',
+            price: 5,
+            quantity: 2,
+            category: 'T-shirts',
+          },
+        ],
+      });
+      } catch (error) {
+        console.error('fail to send Zaraz event', error)
+      }
+    </script>
   </>
 </Layout>
 
